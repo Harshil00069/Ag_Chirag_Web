@@ -1,3 +1,7 @@
+import 'package:ag_chirag_web/config/app_pages.dart';
+import 'package:ag_chirag_web/config/config_toast.dart';
+import 'package:ag_chirag_web/constant/common_utils.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -37,21 +41,43 @@ RxBool isPasswordVisible = false.obs;
 //   passwordController.clear();
 //  }
 //
-// bool onCheckAllFieldsValidation() {
-//   final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-//
-//   if (emailController.text.trim().isEmpty) {
-//     ConfigToast.showToast(message: "You Have Miss Email Its Required", type: ToastType.error);
-//     return false;
-//   } else if (!emailRegex.hasMatch(emailController.text.trim())) {
-//     ConfigToast.showToast( message: "Enter a valid email address", type: ToastType.error);
-//     return false;
-//   } else if (passwordController.text.trim().isEmpty) {
-//     ConfigToast.showToast(message: "You Have Miss Password Its Required", type: ToastType.error);
-//     return false;
-//   } else {
-//     return true;
-//   }
-// }
+bool onCheckAllFieldsValidation() {
+  final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+
+  if (emailController.text.trim().isEmpty) {
+    ConfigToast.showToast(message: "You Have Miss Email Its Required", type: ToastType.error);
+    return false;
+  } else if (!emailRegex.hasMatch(emailController.text.trim())) {
+    ConfigToast.showToast( message: "Enter a valid email address", type: ToastType.error);
+    return false;
+  } else if (passwordController.text.trim().isEmpty) {
+    ConfigToast.showToast(message: "You Have Miss Password Its Required", type: ToastType.error);
+    return false;
+  } else {
+    return true;
+  }
+}
+
+
+  Future<User?> logIn(String email, String password) async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    isAdminLoading.value = true;
+    try {
+      UserCredential userCredential = await auth.signInWithEmailAndPassword(
+          email: email, password: password);
+
+      if(userCredential.user != null){
+        Get.toNamed(AppRoutes.dashboardScreen);
+      }else{
+        isAdminLoading.value = false;
+      }
+      isAdminLoading.value = false;
+      return userCredential.user;
+    } catch (e) {
+      isAdminLoading.value = false;
+      print(e);
+      return null;
+    }
+  }
 
 }

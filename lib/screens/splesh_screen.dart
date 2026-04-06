@@ -1,6 +1,6 @@
 import 'package:ag_chirag_web/config/app_pages.dart';
-import 'package:ag_chirag_web/utils/app_prefs_manager.dart';
 import 'package:ag_chirag_web/utils/image_path.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -23,9 +23,8 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> goToRespectiveRoutes() async {
-    // await UserInfo.fillUserDetailBucket();
     var redirectRoute = '';
-    if (loginCheck()) {
+    if (await checkLogin()) {
       redirectRoute = AppRoutes.dashboardScreen;
     } else {
       redirectRoute = AppRoutes.loginScreen;
@@ -33,13 +32,17 @@ class _SplashScreenState extends State<SplashScreen> {
     Get.offAllNamed(redirectRoute);
   }
 
-  bool loginCheck() {
-    if (SharedPref.isLogin) {
-      return true;
-    } else {
-      return false;
+  Future<bool> checkLogin()async{
+    bool isUserLoginCheck = false;
+    FirebaseAuth auth = FirebaseAuth.instance;
+    final user = auth.currentUser;
+
+    if(user != null){
+      isUserLoginCheck = true;
     }
+    return isUserLoginCheck;
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,5 +1,5 @@
+import 'package:ag_chirag_web/common_controller/custom_controller.dart';
 import 'package:ag_chirag_web/config/app_colors.dart';
-import 'package:ag_chirag_web/config/app_pages.dart';
 import 'package:ag_chirag_web/screens/authentication/Login/controller/admin_login_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,7 +14,16 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
 
 final AdminLoginController adminLoginController = Get.put(AdminLoginController());
+final CommonController commonCtrl = Get.find<CommonController>();
 
+
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    print("Selected Value=> ${commonCtrl.selectedRoute.value}");
+  }
   @override
   Widget build(BuildContext context) {
     final isDesktop = MediaQuery.of(context).size.width > 1000;
@@ -181,11 +190,9 @@ final AdminLoginController adminLoginController = Get.put(AdminLoginController()
         // Sign In Button
         ElevatedButton(
           onPressed: () {
-            Get.toNamed(AppRoutes.dashboardScreen);
-                // if(adminLoginController.onCheckAllFieldsValidation()){
-                //   adminLoginController.insertUpdateStudRegistrationData();
-                // }
-            // Handle login logic
+            if(adminLoginController.onCheckAllFieldsValidation()){
+              adminLoginController.logIn(adminLoginController.emailController.text,adminLoginController.passwordController.text);
+            }
           },
           style: ElevatedButton.styleFrom(
             backgroundColor: AppColor.drawerSelectedColor,

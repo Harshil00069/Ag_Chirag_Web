@@ -1,6 +1,7 @@
 import 'package:ag_chirag_web/common_controller/custom_controller.dart';
 import 'package:ag_chirag_web/config/app_colors.dart';
 import 'package:ag_chirag_web/config/app_pages.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -98,6 +99,15 @@ class _CustomDrawerState extends State<CustomDrawer> {
             "Orders",
             commonCtrl.selectedRoute.value,
           ),
+          _buildSidebarItem(
+            7,
+            context,
+            'LogOut',
+            Icons.logout,
+            isDrawer,
+            "LogOut",
+            commonCtrl.selectedRoute.value,
+          ),
 
           // PROMOTION MANAGEMENT (Not fully visible, just adding for structure)
           // _buildMenuSectionHeader('PROMOTION MANAGEMENT'),
@@ -131,11 +141,14 @@ class _CustomDrawerState extends State<CustomDrawer> {
     return InkWell(
       onTap: () async {
         commonCtrl.selectedRoute.value = itemRouteId;
-        // print("Selected Value=> ${commonCtrl.selectedRoute.value}");
+        print("Selected Value=> ${commonCtrl.selectedRoute.value}");
         if(itemRouteId == AppRoutes.dashboardScreen){
           Get.offAllNamed(itemRouteId);
         }else{
-          await  Get.toNamed(itemRouteId);
+          
+          await Get.toNamed(itemRouteId);
+          // logOut(context);
+          // await  Get.offAllNamed(AppRoutes.loginScreen);
         }
         String currentPageName = Get.currentRoute;
         // print("Current Page Name=> $currentPageName");
@@ -177,5 +190,17 @@ class _CustomDrawerState extends State<CustomDrawer> {
     );
   }
 
+
+  Future logOut(BuildContext context) async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+
+    try {
+      await auth.signOut().then((value) {
+        Get.offAndToNamed(AppRoutes.loginScreen);
+      });
+    } catch (e) {
+      print("error");
+    }
+  }
 
 }

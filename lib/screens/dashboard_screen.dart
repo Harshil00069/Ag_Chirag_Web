@@ -102,6 +102,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           Container(
             color: AppColor.secondary,
             height: Get.height,
+            width: Get.width,
             child: Padding(
               padding: const EdgeInsets.all(24.0),
               child: Column(
@@ -113,8 +114,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   ),
                   const SizedBox(height: 20),
                   // 2. Metric Cards Grid
-                  _buildMetricCardsGrid(isDesktop: isDesktop),
-                  const SizedBox(height: 30),
+                  // _buildMetricCardsGrid(isDesktop: isDesktop),
+                  // const SizedBox(height: 30),
                 ],
               ),
             ),
@@ -147,168 +148,5 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  // Widget to build the 4 metric cards
-  Widget _buildMetricCardsGrid({required bool isDesktop,}) {
-    // Data list mimicking the screenshot
-    final List<Map<String, String>> metrics = [
-      {
-        'title': 'Sales total',
-        'value': '\$204,192.05',
-        'icon': "shopping_cart_outlined",
-        'color': 'red',
-      },
-      {
-        'title': 'Average Order Value',
-        'value': '\$598.80',
-        'icon': "money",
-        'color': 'green',
-      },
-      {
-        'title': 'Total Orders',
-        'value': '\$341',
-        'icon': "receipt_long",
-        'color': 'purple',
-      },
-      {
-        'title': 'Sold Products',
-        'value': '\$520',
-        'icon': "production_quantity_limits",
-        'color': 'orange',
-      },
-    ];
 
-    return GridView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-        maxCrossAxisExtent: 350, // Max width of each card before wrapping
-        crossAxisSpacing: 16.0,
-        mainAxisSpacing: 16.0,
-        childAspectRatio: isDesktop ?2.2 :1.8, // Taller aspect ratio to fit content
-      ),
-      itemCount: metrics.length,
-      itemBuilder: (context, index) {
-        final item = metrics[index];
-        final Color color = Colors.blue; // Using a single color for simplicity
-        return Card(
-          color: Colors.white,
-          elevation: 2,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: color.withValues(alpha: 0.1),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Icon(
-                        getIcon(metrics[index]["icon"].toString()),
-                        color: color,
-                        size: 20,
-                      ),
-                    ),
-                    SizedBox(width: 10),
-                    Expanded(
-                      child: Text(
-                        item['title']!,
-                        style: const TextStyle(fontSize: 14, color: Colors.black,fontWeight: FontWeight.bold),
-                        overflow: TextOverflow.clip,
-                      ),
-                    ),
-                  ],
-                ),
-                Text(
-                  item['value']!,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  IconData getIcon(String name) {
-    switch (name) {
-      case "shopping_cart_outlined":
-        return Icons.shopping_cart_outlined;
-      case "money":
-        return Icons.money;
-      case "receipt_long":
-        return Icons.receipt_long;
-      case "production_quantity_limits":
-        return Icons.production_quantity_limits;
-      default:
-        return Icons.help;
-    }
-  }
-
-  /*  // Placeholder for the Weekly Sales Chart Card
-  Widget _buildWeeklySalesCard() {
-    return Card(
-      elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      child: const Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Weekly Sales',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 10),
-            // *** Placeholder for the bar chart widget ***
-            AspectRatio(
-              aspectRatio: 1.8,
-              child: Center(
-                child: Text('Bar Chart Placeholder'),
-              ),
-            ),
-            // *******************************************
-          ],
-        ),
-      ),
-    );
-  }
-
-  // Placeholder for the Orders Status Donut/Pie Chart Card
-  Widget _buildOrdersStatusCard() {
-    return Card(
-      elevation: 2,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      child: const Padding(
-        padding: EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Orders Status',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 10),
-            // *** Placeholder for the donut chart widget ***
-            AspectRatio(
-              aspectRatio: 1.0,
-              child: Center(
-                child: Text('Donut Chart Placeholder'),
-              ),
-            ),
-            // ********************************************
-          ],
-        ),
-      ),
-    );
-  }*/
 }

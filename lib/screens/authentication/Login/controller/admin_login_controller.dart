@@ -67,7 +67,7 @@ bool onCheckAllFieldsValidation() {
           email: email, password: password);
 
       if(userCredential.user != null){
-        Get.toNamed(AppRoutes.dashboardScreen);
+        Get.toNamed(AppRoutes.mainShell);
       }else{
         isAdminLoading.value = false;
       }

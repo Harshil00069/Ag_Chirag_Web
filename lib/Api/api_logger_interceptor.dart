@@ -1,4 +1,3 @@
-
 import 'package:ag_chirag_web/constant/common_utils.dart';
 import 'package:dio/dio.dart';
 
@@ -44,7 +43,9 @@ class ApiLoggerInterceptor extends Interceptor {
     CommonUtils.logErrorMessage("MESSAGE  : ${err.message}");
     CommonUtils.logErrorMessage("STACKTRACE:");
     CommonUtils.logErrorMessage(err.stackTrace);
-    CommonUtils.logErrorMessage("------------ cURL (Error Request) -----------");
+    CommonUtils.logErrorMessage(
+      "------------ cURL (Error Request) -----------",
+    );
     CommonUtils.logErrorMessage(curl);
     CommonUtils.logErrorMessage("-------------- END ERROR --------------");
 

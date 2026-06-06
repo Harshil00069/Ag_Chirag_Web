@@ -52,15 +52,15 @@ class _CustomDrawerState extends State<CustomDrawer> {
           const Divider(color: Colors.white12, height: 1),
           // OVERVIEW & MEDIA
           _buildMenuSectionHeader('OVERVIEW & MEDIA'),
-          _buildSidebarItem(
-            1,
-            context,
-            'Dashboard',
-            Icons.dashboard,
-            isDrawer,
-            AppRoutes.dashboardScreen,
-            commonCtrl.selectedRoute.value,
-          ),
+          // _buildSidebarItem(
+          //   1,
+          //   context,
+          //   'Dashboard',
+          //   Icons.dashboard,
+          //   isDrawer,
+          //   AppRoutes.dashboardScreen,
+          //   commonCtrl.selectedRoute.value,
+          // ),
           // PRODUCT MANAGEMENT
           _buildMenuSectionHeader('PRODUCT MANAGEMENT'),
           _buildSidebarItem(
@@ -142,13 +142,14 @@ class _CustomDrawerState extends State<CustomDrawer> {
       onTap: () async {
         commonCtrl.selectedRoute.value = itemRouteId;
         print("Selected Value=> ${commonCtrl.selectedRoute.value}");
-        if(itemRouteId == AppRoutes.dashboardScreen){
+        if(index == 1){
           Get.offAllNamed(itemRouteId);
-        }else{
-          
+        }else if(index == 7){
+          logOut(context);
+          await  Get.offAllNamed(AppRoutes.loginScreen);
+        }
+        else{
           await Get.toNamed(itemRouteId);
-          // logOut(context);
-          // await  Get.offAllNamed(AppRoutes.loginScreen);
         }
         String currentPageName = Get.currentRoute;
         // print("Current Page Name=> $currentPageName");

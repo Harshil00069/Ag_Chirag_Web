@@ -162,6 +162,9 @@ class _UserListScreenState extends State<UserListScreen> {
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               child: DataTable(
+                columnSpacing: 0,
+                horizontalMargin: 0,
+                // border: TableBorder.all(color: Colors.black),
                 columns: [
                   DataColumn(label: Text("Customer",style: TextStyle(fontWeight: FontWeight.w600),),columnWidth: isWeb ? FixedColumnWidth(40):FixedColumnWidth(160)),
                   DataColumn(label: Text("Email",style: TextStyle(fontWeight: FontWeight.w600),),columnWidth: isWeb ? FixedColumnWidth(60):FixedColumnWidth(200)),

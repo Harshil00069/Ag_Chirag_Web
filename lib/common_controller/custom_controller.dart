@@ -4,7 +4,7 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
 class CommonController extends GetxController {
-  RxString selectedRoute = AppRoutes.dashboardScreen.obs;
+  RxString selectedRoute = AppRoutes.mainShell.obs;
   var hoverIndex = (-1).obs;
   var isHovering = false.obs;
 

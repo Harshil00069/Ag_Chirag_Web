@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> goToRespectiveRoutes() async {
     var redirectRoute = '';
     if (await checkLogin()) {
-      redirectRoute = AppRoutes.dashboardScreen;
+      redirectRoute = AppRoutes.mainShell;
     } else {
       redirectRoute = AppRoutes.loginScreen;
     }

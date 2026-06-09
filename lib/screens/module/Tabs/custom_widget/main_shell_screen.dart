@@ -1,4 +1,5 @@
 import 'package:ag_chirag_web/screens/module/Tabs/home_tab/screen/home_tab_screen.dart';
+import 'package:ag_chirag_web/screens/module/Tabs/position_data_tab/screen/position_tab_screen.dart';
 import 'package:ag_chirag_web/screens/module/Tabs/watch_list_tab/screen/watch_list_tab_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -158,7 +159,7 @@ class _MainShellState extends State<MainShell>
                 WatchListTabScreen(),
                 HomeTabScreen(),
                 HomeTabScreen(),
-                HomeTabScreen(),
+                PositionTabScreen(),
                 // SearchShareTab(),
                 // WatchListTab(),
                 // OrdersTab(),

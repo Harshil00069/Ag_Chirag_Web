@@ -77,6 +77,7 @@ class PositionData {
     required this.ltp,
     required this.close,
     required this.client,
+    required this.clientName,
   });
 
   final String? symboltoken;
@@ -123,6 +124,9 @@ class PositionData {
   final String? ltp;
   final String? close;
   final String? client;
+  String? clientName;
+
+  bool get isPnlPositive => (double.tryParse(pnl ?? '') ?? 0) >= 0;
 
   factory PositionData.fromJson(Map<String, dynamic> json){
     return PositionData(
@@ -170,6 +174,7 @@ class PositionData {
       ltp: json["ltp"],
       close: json["close"],
       client: json["client"],
+      clientName: json["clientName"],
     );
   }
 

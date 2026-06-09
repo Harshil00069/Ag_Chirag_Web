@@ -91,14 +91,15 @@ class _PositionTabScreenState extends State<PositionTabScreen> {
           columnWidths: const {
             0: FixedColumnWidth(110),
             1: FixedColumnWidth(130),
-            2: FixedColumnWidth(70),
-            3: FixedColumnWidth(130),
-            4: FixedColumnWidth(80),
-            5: FixedColumnWidth(160),
-            6: FixedColumnWidth(70),
-            7: FixedColumnWidth(110),
+            2: FixedColumnWidth(130),
+            3: FixedColumnWidth(70),
+            4: FixedColumnWidth(130),
+            5: FixedColumnWidth(80),
+            6: FixedColumnWidth(160),
+            7: FixedColumnWidth(70),
             8: FixedColumnWidth(110),
-            9: FixedColumnWidth(90),
+            9: FixedColumnWidth(110),
+            10: FixedColumnWidth(90),
           },
           children: [
             // Header
@@ -108,6 +109,7 @@ class _PositionTabScreenState extends State<PositionTabScreen> {
                   [
                         '',
                         'Client Name',
+                        'Treading Symbol',
                         'Exchange',
                         'Product Type',
                         'Option',
@@ -195,6 +197,20 @@ class _PositionTabScreenState extends State<PositionTabScreen> {
                     ),
                     child: Text(
                       p.clientName.toString(),
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontFamily: 'monospace',
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 14,
+                      vertical: 12,
+                    ),
+                    child: Text(
+                      p.tradingsymbol.toString(),
                       style: const TextStyle(
                         fontSize: 12,
                         fontFamily: 'monospace',
@@ -379,12 +395,14 @@ class _PositionTabScreenState extends State<PositionTabScreen> {
         color: const Color(0xFFF0FDF4),
         borderRadius: BorderRadius.circular(20),
       ),
-      child: Text(
-        exchange,
-        style: const TextStyle(
-          fontSize: 12,
-          fontWeight: FontWeight.w600,
-          color: Color(0xFF166534),
+      child: Center(
+        child: Text(
+          exchange,
+          style: const TextStyle(
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
+            color: Color(0xFF166534),
+          ),
         ),
       ),
     );
@@ -422,7 +440,7 @@ class _PositionTabScreenState extends State<PositionTabScreen> {
         child: Text(
           type,
           style: TextStyle(
-            fontSize: 11,
+            fontSize: 12,
             fontWeight: FontWeight.w600,
             color: isCe ? const Color(0xFF1D4ED8) : const Color(0xFF92400E),
           ),

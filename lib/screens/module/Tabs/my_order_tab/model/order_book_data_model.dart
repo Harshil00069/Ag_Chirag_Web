@@ -126,6 +126,11 @@ class OrderBookData {
    String clientcode;
    String clientName;
 
+  bool get isBuy      => transactiontype.toUpperCase() == 'BUY';
+  bool get isComplete => status.toLowerCase() == 'complete';
+  bool get isPending  => status.toLowerCase() == 'pending';
+  bool get isRejected => status.toLowerCase() == 'rejected';
+
   factory OrderBookData.fromJson(Map<String, dynamic> json){
     return OrderBookData(
       variety: json["variety"] ?? "",
